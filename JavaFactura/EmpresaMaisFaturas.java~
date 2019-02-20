@@ -1,0 +1,17 @@
+
+/**
+ * Write a description of class afs here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class EmpresaMaisFaturas implements Comparator<Empresa> {
+        public int compare(Empresa e1,Empresa e2) {
+            if(listagemFaturasEmpresa(e1.getNif()).size() > listagemFaturasEmpresa(e2.getNif()).size())
+                return -1;
+            if(listagemFaturasEmpresa(e1.getNif()).size() < listagemFaturasEmpresa(e2.getNif()).size())
+                return 1;
+            return 0;
+        }
+    }
+    

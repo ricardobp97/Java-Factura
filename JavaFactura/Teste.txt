@@ -1,0 +1,109 @@
+------ JavaFactura ------
+JavaFactura
+--->Contribuintes:
+{222222222=NIF: 222222222;
+Email: Susana@email;
+Nome: Susana Sousa;
+Morada: Barcelos;
+Password: pass2Numero de Agregados: 2
+Nifs Agregados: [111111111]
+Coeficiente Fiscal: 2.0
+Codigos: []
+, 444444444=NIF: 444444444;
+Email: Rafaela@email;
+Nome: Rafaela Soares;
+Morada: Braga;
+Password: pass4Numero de Agregados: 1
+Nifs Agregados: [555555555, 666666666]
+Coeficiente Fiscal: 3.0
+Codigos: []
+, 666666666=NIF: 666666666;
+Email: Maria@email;
+Nome: Maria Soares;
+Morada: Braga;
+Password: pass6Numero de Agregados: 1
+Nifs Agregados: [444444444, 555555555]
+Coeficiente Fiscal: 3.0
+Codigos: []
+, 111111111=NIF: 111111111;
+Email: Bruno@email;
+Nome: Bruno Sousa;
+Morada: Barcelos;
+Password: pass1Numero de Agregados: 2
+Nifs Agregados: [222222222]
+Coeficiente Fiscal: 2.0
+Codigos: []
+, 333333333=NIF: 333333333;
+Email: Ricardo@email;
+Nome: Ricardo Pereira;
+Morada: Braga;
+Password: pass3Numero de Agregados: 1
+Nifs Agregados: []
+Coeficiente Fiscal: 1.0
+Codigos: []
+, 555555555=NIF: 555555555;
+Email: João@email;
+Nome: João Soares;
+Morada: Braga;
+Password: pass5Numero de Agregados: 1
+Nifs Agregados: [444444444, 666666666]
+Coeficiente Fiscal: 3.0
+Codigos: []
+}
+--->Empresas:
+{888888888=NIF: 888888888;
+Email: Imobiliaria@email;
+Nome: Imobiliária;
+Morada: Porto;
+Password: pass8;
+Fator de Dedução Fiscal: 5.5;
+ Atividades: [Habitacao]
+, 999999999=NIF: 999999999;
+Email: SaudeEducacao@email;
+Nome: Saúde e Educação Lda.;
+Morada: Lisboa;
+Password: pass9;
+Fator de Dedução Fiscal: 6.5;
+ Atividades: [Educacao, Saude]
+, 777777777=NIF: 777777777;
+Email: Geral@emai;
+Nome: Geral Empresa;
+Morada: Porto;
+Password: pass7;
+Fator de Dedução Fiscal: 1.5;
+ Atividades: [Geral]
+}
+--->Facturas:
+{0=NIF Emitente: 777777777
+Designação: Geral Empresa
+Data: 19-4-2018
+NIF Cliente: 222222222
+Descrição: N/A
+Atividade: Geral
+Valor: 70.0
+Histórico: N/A
+, 1=NIF Emitente: 999999999
+Designação: Saúde e Educação Lda.
+Data: 9-1-2018
+NIF Cliente: 111111111
+Descrição: N/A
+Atividade: Tem de ser catalogada
+Valor: 50.0
+Histórico: N/A
+, 2=NIF Emitente: 888888888
+Designação: Imobiliária
+Data: 13-2-2018
+NIF Cliente: 333333333
+Descrição: Arrendamento
+Atividade: Habitacao
+Valor: 100.0
+Histórico: N/A
+, 4=NIF Emitente: 777777777
+Designação: Geral Empresa
+Data: 14-3-2018
+NIF Cliente: 444444444
+Descrição: N/A
+Atividade: Geral
+Valor: 25.0
+Histórico: N/A
+}

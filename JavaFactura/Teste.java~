@@ -1,0 +1,28 @@
+
+/**
+ * Write a description of class Teste here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+
+import java.util.*;
+
+public class Teste
+{
+  JavaFactura jf = new JavaFactura();
+  
+  List lista = new ArrayList<Integer>();
+    
+  Empresa e = new Empresa(1, "email", "Empresa 1", "morada", "pass" , 1.0, lista);
+  
+  jf.empresas.put(1,e);
+  
+  
+ 
+   
+  
+  
+  
+  
+}

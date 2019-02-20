@@ -1,0 +1,8 @@
+public class FaturaInexistenteException extends Exception {
+    public FaturaInexistenteException () {
+        super();
+    }
+    public FaturaInexistenteException (String message) {
+        super(message);
+    }
+}

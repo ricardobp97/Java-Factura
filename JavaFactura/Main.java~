@@ -1,0 +1,274 @@
+import java.util.Scanner;
+import static java.lang.System.in;
+import java.util.InputMismatchException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.GregorianCalendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+
+/**
+ * Escreva a descrição da classe Main aqui.
+ * 
+ * @author (seu nome) 
+ * @version (número de versão ou data)
+ */
+public class Main{
+    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
+    private static JavaFactura f;
+      
+    
+    // !!!!!!!!!! Incompleta. Falta a parte "as despesas que foram emitidas em seu nome". Não entendi! Falta testar.
+    public void montanteContribuinteAgregado() {
+           int nifContribuinteIndividual = 0;
+           double montante, montanteAgregado = 0;
+           boolean flag = false;
+           List<Fatura> faturasIndividual = new ArrayList<Fatura>(); // faturas do contribuinte individual em questão
+           List<Fatura> faturasAgregado = new ArrayList<Fatura>(); // faturas do agregado do contribuinte individual em questão
+           List<Integer> nifAgregados = new ArrayList<Integer>(); 
+           
+            while (!flag) {
+            System.out.println("Nif do contribuinte individual: ");
+            nifContribuinteIndividual = LerDados.leInteiro("Nif do contribuinte individual inválido! Escreva novamente,por favor.", "Nif do contribuinte individual: ");
+            
+            if (((f!= null) && (!(f.containsContribuinte(nifContribuinteIndividual)))) || (f==null)) {
+                System.out.println("O nif do contribuinte individual não existe!");
+            }
+            else {
+                flag= true;
+            }
+           
+           }
+     
+           faturasIndividual = f.listagemFaturasIndividual(nifContribuinteIndividual);
+           
+           nifAgregados = f.getContribuinteIndividual(nifContribuinteIndividual).getNifsAgregados();
+           
+           for(int i=0; i < nifAgregados.size(); i++) {
+                    for(Fatura ff: f.getFaturas().values()) {
+                        if (ff.getNifC() == nifAgregados.get(i)) {
+                             faturasAgregado.add(ff.clone());
+                        }
+                    }
+           }
+           
+           montante = f.montanteDeducaoPorListagemFatura(faturasIndividual);
+           montanteAgregado = f.montanteDeducaoPorListagemFatura(faturasAgregado);
+           
+           System.out.println ("O montante de dedução fiscal acumulad por si é" + montante + "\n\n");
+           System.out.println ("O montante de dedução fiscal acumulado pelo seu agregado familiar é" + montanteAgregado + "\n");
+    }
+      
+    
+    // Completa. Falta testar.   Ordenada por valor.
+    public void listagemFaturas() {
+           int nifEmpresa = 0;
+           boolean flag = false;
+           List<Fatura> faturas = new ArrayList<Fatura>();
+           
+            
+            while (!flag) {
+            System.out.println("Nif da empresa: ");
+            nifEmpresa = LerDados.leInteiro("Nif da empressa inválido! Escreva novamente,por favor.", "Nif da empresa: ");
+            
+            if (((f!= null) && (!(f.containsContribuinte(nifEmpresa)))) || (f==null)) {
+                System.out.println("O nif da empresa não existe!");
+            }
+            else {
+                flag= true;
+            }
+           
+        }
+    
+        
+           faturas = f.listagemFaturasEmpresa(nifEmpresa);
+           Collections.sort (faturas, new ComparadorValor()); 
+           
+           for (Iterator<Fatura> iterator = faturas.iterator(); iterator.hasNext(); ) {  
+                Fatura f = iterator.next();  
+                System.out.println ("------------------------------------------------\n");  
+                System.out.println (f.getId() + "\n");  
+                System.out.println (f.getNifE() + "\n");  
+                System.out.println (f.getData() + "\n");  
+                System.out.println (f.getDesignacao() + "\n");  
+                System.out.println (f.getNifC() + "\n");  
+                System.out.println (f.getDescricao() + "\n");  
+                System.out.println (f.getAtividade() + "\n");  
+                System.out.println (f.getValor() + "\n");  
+                System.out.println (f.getDeducao() + "\n"); 
+                System.out.println (f.getEstado() + "\n"); 
+                System.out.println ("------------------------------------------------\n\n\n");  
+                
+           }
+    }
+    
+    
+    // Completa. Falta testar
+    public void totalEmpresa() {
+             GregorianCalendar begin = new GregorianCalendar();
+             GregorianCalendar end = new GregorianCalendar();
+             GregorianCalendar data = new GregorianCalendar();
+            // Empresa e = new Empresa(); 
+             boolean flag = false;
+             int nifEmpresa = 0;
+             int dia1, dia2, mes1, mes2, ano1, ano2;
+             double soma;
+             
+             
+             
+            while (!flag) {
+            System.out.println("Nif da empresa: ");
+            nifEmpresa = LerDados.leInteiro("Nif da empressa inválido! Escreva novamente,por favor.", "Nif da empresa: ");
+            
+            if (((f!= null) && (!(f.empresas.containsContribuinte(nifEmpresa)))) || (f==null)) {
+                System.out.println("O nif da empresa não existe!");
+            }
+            else {
+                flag= true;
+            }
+           
+        }
+        
+            while(!flag){
+           System.out.println("Para a data do início do período que quer calcular, introduza o dia: ");
+           dia1 = LerDados.leDia("Dia inválido! Escreva novamente,por favor.", "Dia: ");
+        
+           System.out.println("Para a data do início do período que quer calcular, introduza o mês: ");
+           mes1 = LerDados.leMes("Mês inválido! Escreva novamente,por favor.", "Mês: ");
+           
+           System.out.println("Para a data do início do período que quer calcular, introduza o ano: ");
+           ano1 = LerDados.leAno("Ano inválido! Escreva novamente,por favor.", "Ano: ");
+           
+        
+           System.out.println("Para a data do fim do período que quer calcular, introduza o dia: ");
+           dia2 = LerDados.leDia("Dia inválido! Escreva novamente,por favor.", "Dia: ");
+        
+           System.out.println("Para a data do fim do período que quer calcular, introduza o mês: ");
+           mes2 = LerDados.leMes("Mês inválido! Escreva novamente,por favor.", "Mês: ");
+           
+           System.out.println("Para a data do fim do período que quer calcular, introduza o ano: ");
+           ano2 = LerDados.leAno("Ano inválido! Escreva novamente,por favor.", "Ano: ");
+           
+           
+           begin = new GregorianCalendar(ano1,mes1,dia1);
+           end = new GregorianCalendar(ano2,mes2,dia2);
+           
+           if (begin.before(end)){
+               soma = f.totalEmpresa(nifEmpresa,begin,end);
+               System.out.println("Total faturado pela empresa: " + soma + " €\n");  
+               flag = true;
+           }
+           else {
+               System.out.println("A segunda data é anterior à primeira!\n");
+            }
+        }
+            
+           
+    }
+    
+    
+    // !!!!!!!! Incompleta. Falta encontrar uma forma de guardar como listas algumas informações que o usário tem de dar. E falta testar.
+    public void registarNif() {
+         int nif= 0;
+         String email = "";
+         String nome = "";
+         String morada = "";
+         String password = "";
+         boolean flag = false;
+         int option = 0;
+         
+         
+         while (!flag) {
+            System.out.println("Nif: ");
+            nif = LerDados.leInteiro("Nif inválido! Escreva novamente,por favor.", "Nif: ");
+            
+            if (f!= null && f.containsContribuinte(nif)) {
+                System.out.println("O nif já existe!");
+            }
+            else {
+                flag= true;
+            }
+           
+        }
+        
+        System.out.println("Email: ");
+        nome = LerDados.leString("Email inválido! Escreva novamente,por favor.", "Email: ");
+        
+        System.out.println("Nome: ");
+        nome = LerDados.leString("Nome inválido! Escreva novamente,por favor.", "Nome: ");
+        
+        System.out.println("Morada: ");
+        morada = LerDados.leString("Morada inválida! Escreva novamente,por favor.", "Morada: ");
+        
+        System.out.println("Password: ");
+        password = LerDados.leString("Password inválida! Escreva novamente,por favor.", "Password: ");
+        
+        System.out.println("Selecione uma opção:\n\n  1- Individual\n\n  2- Empresa ");
+        option = LerDados.leOpcao("Tipo inválido! Escreva novamente,por favor.", "Opção: ");
+        
+        
+                                
+        switch (option) {
+            case 1 : System.out.println("Número do agregado: ");
+                     int numAgregado = LerDados.leInteiro("Agregado inválido! Escreva novamente,por favor.", "Agregado: ");
+                     
+                     System.out.println("Número dos nifs do agregado: ");
+                     ArrayList<Integer> nifsAgregados = null;
+                     
+                     System.out.println("Coeficiente fiscal para efeitos de dedução: ");
+                     double coefFiscal = LerDados.leDouble("Coeficiente fiscal inválido! Escreva novamente,por favor.", "Coeficiente fiscal: ");
+                     
+                     System.out.println("Códigos das atividades económicas para as quais um determinado contribuinte tem possibilidade de deduzir despesas:");
+                     List<Integer> codigos =  null;
+                     
+                     registarIndividual(nif, email, nome, morada, password, numAgregado, nifsAgregados,coefFiscal,codigos);
+                     break;
+                     
+                     
+            case 2 : System.out.println("Fator que a empresa tem no cálculo de dedução fiscal: ");
+                     double fator = LerDados.leDouble("Fator inválido! Escreva novamente,por favor.", "Fator: ");
+                     
+                     System.out.println("Atividades em que a empresa atua: ");
+                     List<Integer> atividades = null;
+                    
+                     registarEmpresa(nif, email, nome, morada, password, fator, atividades);
+                     break;
+        }
+    }
+    
+       
+   
+    
+    public  void registarIndividual(int nif, String email, String nome, String m, String pass,int n, List<Integer> nifs, double c, List<Integer> cod) {
+                                            
+        Contribuinte contribuinte = new Contribuinte(nif, email, nome, m, pass, n, nifs, c, cod);
+                                            
+        try {
+            f.registaContribuinte(contribuinte);
+        }
+        catch (NifExistenteException e) {
+            System.out.println("O contribuinte já está registado!\n" + e.getMessage());
+        }
+        
+    }
+    
+    
+    public  void registarEmpresa(int nif, String email, String nome, String m, String pass,double fator, List<Integer> atividades) {
+                                            
+        Empresa empresa = new Empresa(nif, email, nome, m, pass,fator, atividades);
+                                            
+        try {
+            f.registaEmpresa(empresa);
+        }
+        catch (NifExistenteException e) {
+            System.out.println("O contribuinte já está registado!\n" + e.getMessage());
+        }
+        
+    }
+    
+    
+    
+    
+}

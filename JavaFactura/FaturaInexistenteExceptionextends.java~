@@ -1,0 +1,17 @@
+
+/**
+ * Write a description of class FaturaInexistenteException here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class FaturaInexistenteExceptionextends Exception {
+    public EmpresaExistenteException () {
+        super();
+    }
+    public EmpresaExistenteException (String message) {
+        super(message);
+    }
+}
+
+}
